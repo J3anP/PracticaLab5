@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{gticsf.html :: header( title = 'Gestión de Técnicos')}"></head>
+<body>
+<div class="container">
+    <nav th:replace="~{gticsf.html :: navbar( active = 'Technician')}"></nav>
+    <div class="row mb-4">
+        <div class="col-md-6 offset-md-3">
+            <h2>Editar Tecnico</h2>
+            <hr/>
+            <form th:action="@{'/tecnico/save'}" method="post" th:object="${tecnico}">
+                <input th:field="*{technicianId}" type="hidden"/>
+                <div class="mb-3">
+                    <label class="form-label">Nombre</label>
+                    <input type="text" class="form-control" th:field="*{firstName}"/>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Apellido</label>
+                    <input type="text" class="form-control" th:field="*{lastName}"/>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">DNI</label>
+                    <input type="text" class="form-control"
+                           th:field="*{dni}"/>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Edad</label>
+                    <input type="text" class="form-control" th:field="*{age}"/>
+                </div>
+
+                <a th:href="@{'/tecnico'}" class="btn btn-danger">Cancelar</a>
+                <button type="submit" class="btn btn-primary"
+                        th:text="${tecnico.technicianId==0? 'Guardar':'Actualizar'}">Actualizar
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+<script th:replace="~{gticsf.html :: footer-bootstrap}"></script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{gticsf.html :: header( title = 'Gestión de técnicos')}"></head>
+<body>
+<main>
+    <div class="container px-4 pb-5">
+        <nav th:replace="~{gticsf.html :: navbar( active = 'Technician')}"></nav>
+        <h1 class="pb-2 border-bottom">Lista de empleados</h1>
+        <a class="btn btn-primary mt-4 mb-4" th:href="@{'/technician/new'}">Nuevo Técnico</a>
+        <div th:if="${msg != null}" th:text="${msg}" class="alert alert-success" role="alert"></div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Nombre</th>
+                <th>DNI</th>
+                <th>Telefono</th>
+                <th>Edad</th>
+                <th></th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="tecnico, info : ${listaTecnicos}">
+                <td th:text="${info.index + 1}"></td>
+                <td th:text="${tecnico.firstName} + ' ' +${tecnico.lastName}"></td>
+                <td th:text="${tecnico.dni}"></td>
+                <td th:text="${tecnico.phone}"></td>
+                <td th:text="${tecnico.age}"></td>
+                <td><a class="btn btn-primary" th:href="@{'/tecnico/edit' + '?id=' + ${tecnico.technicianId}}">Editar</a>
+                </td>
+                <td><a class="btn btn-danger" th:href="@{'/tecnico/delete' + '?id=' + ${tecnico.technicianId}}">Borrar</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</main>
+<script th:replace="~{gticsf.html :: footer-bootstrap}"></script>
+</body>
+</html>
